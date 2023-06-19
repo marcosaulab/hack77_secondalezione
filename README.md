@@ -50,3 +50,89 @@ Per creare un nuovo controller:
 php artisan make:controller PublicController
 
 ROTTA -> CONTROLLER -> VISTA
+
+
+
+
+
+# Components
+
+I componenti sono dei blocchi di codice riutilizzabili che possono essere inclusi all'iterno di altre viste
+
+1. devo obbligatoriamente creare dentro resources/views una cartella components (deve chiamarsi per forza components)
+2. dentro alla cartella components creare il file che intendo riusare nelle mie viste
+3. Vado a richiamare il componente all'interno della vista con la sintassi: <x-nome_componente />
+
+con la x Laravel ci dice che andrà a cercare all'interno della cartella resources/views/components un file che ha come nome quello che abbiamo specificato dopo "x-"
+
+
+
+## come passiamo parametri ad un componente?
+
+1. Lo tratto com un attributo html: <x-nomecard movieTitle="{{ $movie['title'] }}" ... /> // per ora usiamo questo!
+
+2. Lo tratto come una varibile php: <x-nomecard :movieTitle="$movie['title']" ... />
+
+
+
+## Operatore ternario
+
+espressione ? se vera faccio questo che sta a sinistra dei due punti : se falsa faccio questo che sta a destra dei due punti
+
+E' la stessa cosa di un if else:
+
+Questo codice
+if(Str::lower($movie['genre']) == Str::lower($genre)) {
+    array_push($movieByGenre, $movie);
+}
+
+si può riscrivere così
+
+(Str::lower($movie['genre']) == Str::lower($genre)) ? array_push($movieByGenre, $movie) : ;
+
+e significano esattamente la stessa cosa
+
+
+## Layout
+
+Il layout è la cornice per le nostre viste blade.
+
+1. creare un file dentro resources/views/components che si chiama layout
+2. inseriamo la "parte di sopra": header, title, ecc... e la "parte di sotto": footer, script, chisura /html ecc...
+3. in mezzo inseriamo un "buco" ovvero uno slot: {{ $slot }} (deve chiamarsi obbligatoriamente $slot)
+4. inglobiamo all'interno dei tag <x-layout></x-layout> il contenuto variabile delle nostre viste:
+
+<x-layout>
+.....
+</x-layout>
+
+
+# Building  degli asset
+
+1. Prendiamo tutte le risorse css e le assembleremo in un unico file app.css
+2. Prendiamo tutte le risorse js e le assembleremo in un unico file app.js
+3. Poi prenderemo questi 2 file e li renderemo disponibili in /public
+
+Qual è il componente di Laravel che si occupa di fare tutto questo? Vite
+
+Composer -> dependency manager di PHP
+Npm -> dependency manager di Javascript -> è una libreria node.js -> libreria di javascript
+
+Vite è una libreria Javascript che permette a Laravel di gestire il building degli asset: ovvero di comporli tra loro, assemblarli e ottimizzarli per le prestazioni.
+
+Node.Js bisogna installarlo a livello di macchina, computer
+
+Per ogni nostro progetto Laravel (all'interno della cartella del nostro progetto):
+
+1. npm install -> scarica e installa tutte le dipendenze Js nel nostro progetto (all'interno di una cartella node_modules)
+2. npm i bootstrap -> installiamo la dipendenza bootstrap e andremo a usare il suo codice internamente non più tramite CDN
+    Faccio riferimento ai file appena installati all'interno del mio progetto:
+    - dentro app.css: importare i file CSS di bootstrap di cui il mio progetto ha bisogno
+    -  dentro app.js: importare i file JS di bootstrap di cui il mio progetto ha bisogno
+3. Ora dobbiamo rendere disponibili i nostri file asset (css, js) al nostro frontend. Come Facciamo?
+    - 1. vado ad usare la direttava blade @vite
+
+4. npm run dev: 
+    - controlla se sono presenti i file di configurazione e dipendenze
+    - avvia il processo di building degli assett assemblando e minificando i vari file
+    - rimane in ascolto dei cambiamenti al frontend

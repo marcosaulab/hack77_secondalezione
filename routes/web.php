@@ -21,4 +21,7 @@ Route::get('/', [PublicController::class, 'homepage'])->name('home');
 
 Route::get('/chisiamo', [PublicController::class, 'chisiamo'])->name('aboutus');
 
+
 Route::get('/movie/{id}', [PublicController::class, 'moviedetails'])->name('movie.show');
+
+Route::get('/movie/genre/{genre}', [PublicController::class, 'movieByGenre'])->name('movie.genre');

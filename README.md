@@ -130,7 +130,7 @@ Per ogni nostro progetto Laravel (all'interno della cartella del nostro progetto
     - dentro app.css: importare i file CSS di bootstrap di cui il mio progetto ha bisogno
     -  dentro app.js: importare i file JS di bootstrap di cui il mio progetto ha bisogno
 3. Ora dobbiamo rendere disponibili i nostri file asset (css, js) al nostro frontend. Come Facciamo?
-    - 1. vado ad usare la direttava blade @vite
+    - 1. vado ad usare la direttiva blade @vite
 
 4. npm run dev: 
     - controlla se sono presenti i file di configurazione e dipendenze

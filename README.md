@@ -136,3 +136,14 @@ Per ogni nostro progetto Laravel (all'interno della cartella del nostro progetto
     - controlla se sono presenti i file di configurazione e dipendenze
     - avvia il processo di building degli assett assemblando e minificando i vari file
     - rimane in ascolto dei cambiamenti al frontend
+
+
+
+## Clonare un progetto Laravel
+
+1. git clone ...indirizzo repo
+2. composer install / composer update
+3. clonare il file .env.example e rinominarlo in .env
+4. php artisan key:generate
+5. npm install
+6. npm run dev
